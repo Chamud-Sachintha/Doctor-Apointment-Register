@@ -5,7 +5,7 @@ public class PatientDetails {
     private String firstName;
     private String lastName;
     private int age;
-    private int mobileNumber;
+    private String mobileNumber;
     private String gender;
     private String doctorName;
     private String paymentStatus;
@@ -26,7 +26,7 @@ public class PatientDetails {
         this.age = age;
     }
     
-    public void setMobileNumber(int mobileNumber){
+    public void setMobileNumber(String mobileNumber){
         this.mobileNumber = mobileNumber;
     }
     
@@ -58,7 +58,7 @@ public class PatientDetails {
         return this.age;
     }
     
-    public int getMobileNumber(){
+    public String getMobileNumber(){
         return this.mobileNumber;
     }
     

@@ -10,6 +10,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import patientappoinmentregister.dao.PatientDetails;
+import patientappoinmentregister.service.PatientService;
+import patientappointmentregister.util.Util;
 
 /**
  *
@@ -246,23 +248,26 @@ public class AppoinmentRegister extends javax.swing.JFrame {
             }
             
             try{
-                pDetails.setId(patientId);
                 pDetails.setFirstName(fname_txt.getText());
                 pDetails.setLastName(lname_txt.getText());
                 pDetails.setAge(Integer.parseInt(age_txt.getText()));
-                pDetails.setMobileNumber(Integer.parseInt(mobile_txt.getText()));
+                pDetails.setMobileNumber(mobile_txt.getText());
                 pDetails.setGender(gender);
                 pDetails.setDoctorName(doc_name_txt.getText());
                 pDetails.setPaymentStatus(payment_sts_cmb.getSelectedItem().toString());
 
-                Object[] appoinmentDetails = {pDetails.getPatientId(),pDetails.getFirstName(),pDetails.getLastName(),pDetails.getAge(),pDetails.getMobileNumber(),
-                                                pDetails.getGender(),pDetails.getDoctorName(),pDetails.getPaymentStatus()};
-
-                DefaultTableModel tblModel = (DefaultTableModel)appoinment_table.getModel();
-                tblModel.addRow(appoinmentDetails);
-                JOptionPane.showMessageDialog(rootPane, "Patient Appoinment Added.");
-                resetAllFeilds();
-                patientId += 1;
+//                Object[] appoinmentDetails = {pDetails.getPatientId(),pDetails.getFirstName(),pDetails.getLastName(),pDetails.getAge(),pDetails.getMobileNumber(),
+//                                                pDetails.getGender(),pDetails.getDoctorName(),pDetails.getPaymentStatus()};
+//
+//                DefaultTableModel tblModel = (DefaultTableModel)appoinment_table.getModel();
+//                tblModel.addRow(appoinmentDetails);
+                if(PatientService.savePatientAppointmentDetails(pDetails) == true){
+                    JOptionPane.showMessageDialog(rootPane, "Patient Appoinment Added.");
+                    resetAllFeilds();
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Patient Appoinment Not Added.");
+                    resetAllFeilds();
+                }
             }catch(Exception e){
                 JOptionPane.showMessageDialog(rootPane, "There Is An Error Occured.");
             }
